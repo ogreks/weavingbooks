@@ -6,13 +6,19 @@ import (
 	"time"
 )
 
+type User interface {
+	SetUser(member Member)
+	GetUser() Member
+}
+
 type Member struct {
-	account string
-	name string
-	password string
-	locker bool
-	locknums int16
-	createtime time.Time
+	Id interface{}
+	Account string
+	Name string
+	Password string
+	Locker bool
+	Locknums int16
+	Createtime time.Time
 }
 
 func (member *Member) UpdatePassword(password string) bool {
@@ -21,13 +27,9 @@ func (member *Member) UpdatePassword(password string) bool {
 		return false
 	}
 
-	if strings.Compare(member.password,password) != 0 {
-		member.password = password
+	if strings.Compare(member.Password,password) != 0 {
+		member.Password = password
 	}
 
 	return true
-}
-
-func (member Member) GetMember(account string)  {
-
 }
